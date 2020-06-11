@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-metadata
+  labels:
+    app: replicaset-label
+spec:
+  template:
+    metadata:
+      name: podmetadata
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: podmetadata
+        image: tutum/hello-world
+        ports:
+        - containerPort: 80
+  replicas: 4
+  selector:
+    matchLabels:
+      app: hello-world

@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deployment-metadata
+  labels:
+    app: deployment-label
+spec:
+ template:
+   metadata:
+    name: podmetadata
+    labels:
+     app: hello-world
+ strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+ replicas: 5
+ selector:
+  matchLabels:
+    app: httpd
+    version: V2.0.0
+ spec:
+    containers:
+    - name: hello-world
+      image: tutum/hello-world 
+      ports: 80
+

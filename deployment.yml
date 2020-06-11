@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deployment-metadata
+  labels:
+    app: deployment-label
+spec:
+ template:
+   metadata:
+    name: podmetadata
+    labels:
+     app: hello-world
+ replicas: 5
+ selector:
+  matchLabels:
+    app: hello-world
+    version: V1.0.0
+ spec:
+    containers:
+    - name: hello-world
+      image: tutum/hello-world 
+      ports: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollupdate-service
+spec:
+  type: NodePort
+  ports:
+   - port: 80
+     targePort: 80
+     NodePort: 32000
+  selector:
+   app: hello-world
+

@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: service
+metadata:
+ name: service
+ label: service-label
+spec:
+ - port: 8080
+   targetport: 8080
+
+
+
